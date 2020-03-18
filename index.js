@@ -39,10 +39,22 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
-
+Person.prototype.eat = function(somefood){
+  if(this.stomach.length < 10){
+    this.stomach.push(somefood);
+  }
+};
+Person.prototype.poop = function(){
+  this.stomach =[];
+};
+Person.prototype.toString = function(){
+  return `${this.name}, ${this.age}`;
+};
 /*
   TASK 2
     - Write a Car constructor that initializes `model` and `milesPerGallon` from arguments.
@@ -57,9 +69,22 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
+Car.prototype.fill = function(gallons){
+  this.tank += gallons;
+};
+Car.prototype.drive = function(distance){
+  this.odometer += distance;
+  this.tank = this.tank - (distance*(1/(this.milesPerGallon)));
+  if(this.tank <= 0){
+    return `I ran out of fuel at ${this.milesPerGallon*this.tank} miles!`;
+  }
+};
 
 /*
   TASK 3
@@ -76,10 +101,10 @@ function Baby() {
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Global: When "this" is use in the global scope, the value of this is the window/console Object.  
+  2. Implicit Binding:Whatever the object is before the .(dot) is what the value of "this" 
+  3. New Binding: "This" will be whatever the specific instance is that is being created.
+  4. Explicit Binding: Whenever we use call or apply method, "this" is explicitly defined.
 */
 
 
